@@ -1,3 +1,5 @@
+package December_1st;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,7 +11,7 @@ public class CalculateTrebuchet {
         String read;
         int finalSum = 0;
         int finalNumber;
-        Path path = Paths.get("src/testInput");
+        Path path = Paths.get("src/d1Input");
         BufferedReader br = Files.newBufferedReader(path);
 
         while((read = br.readLine()) != null){
@@ -84,4 +86,5 @@ public class CalculateTrebuchet {
         }
         return line;
     }
+
 }
