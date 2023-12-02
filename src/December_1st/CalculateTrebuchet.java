@@ -11,7 +11,7 @@ public class CalculateTrebuchet {
         String read;
         int finalSum = 0;
         int finalNumber;
-        Path path = Paths.get("src/d1Input");
+        Path path = Paths.get("src/December_1st/1Input");
         BufferedReader br = Files.newBufferedReader(path);
 
         while((read = br.readLine()) != null){
