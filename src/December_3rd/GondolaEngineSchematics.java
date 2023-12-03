@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class GondolaEngineSchematics {
-    Path path = Paths.get("src/December_3rd/testInput");
+    Path path = Paths.get("src/December_3rd/Input");
     ArrayList<String> engine = new ArrayList<>();
     ArrayList<Integer> numbers = new ArrayList<>();
     ArrayList<Character> notAllowed = new ArrayList<>(Arrays.asList('1', '2', '3', '4', '5',
             '6', '7', '8', '9', '.'));
+    ArrayList <Gear> gears = new ArrayList<>();
+    ArrayList <Engine> engines = new ArrayList<>();
     String lastLine = "";
     String nextLine = "";
     int finalResult = 0;
@@ -78,24 +80,64 @@ public class GondolaEngineSchematics {
         try (BufferedReader bf = Files.newBufferedReader(path)) {
             String reader;
             while ((reader = bf.readLine()) != null) {
-                engine.add("." + reader + ".");
+                engine.add(reader);
             }
-            for(int i = 0; i < engine.size(); i++){
-                if(i == 0){
-                    lastLine = fillStringWithPeriods();
+            int y = 0;
+            for(String s: engine){
+                int x = 0;
+                for(int i = 0; i < s.length(); i++){
+                    char check = s.charAt(i);
+                    if(check == '*'){
+                        Gear g = new Gear(x, y);
+                        gears.add(g);
+                    }else if(Character.isDigit(check)){
+                        String engine = String.valueOf(check);
+                        int startX = x;
+                        if(Character.isDigit(s.charAt(i + 1))){
+                            engine += String.valueOf(s.charAt(i + 1));
+                            i++;
+                            x++;
+                            if(Character.isDigit(s.charAt(i + 1))){
+                                engine += String.valueOf(s.charAt(i + 1));
+                                i++;
+                                x++;
+                            }
+                        }
+                        Engine g = new Engine(engine, startX, y);
+                        engines.add(g);
+                    }
+                    x++;
                 }
-                if(i != engine.size() - 1){
-                    nextLine = engine.get(i + 1);
-                }else{
-                    nextLine = fillStringWithPeriods();
-                }
-                lastLine = engine.get(i);
+                y++;
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        for(Integer i : numbers){
-            finalResult += i;
+        for(Gear g: gears){
+            int firstEngine = 0;
+            int secondEngine = 0;
+            boolean firstCheck = false;
+            boolean secondCheck = false;
+            for (Engine e: engines){
+                if(secondCheck) {
+                    break;
+                }
+                for(String s: e.getCoordinates()){
+                    if(g.touchingCoordinates.contains(s)){
+                        if(firstCheck){
+                            secondEngine = e.getEngine();
+                            secondCheck = true;
+                            break;
+                        }
+                        firstEngine = e.getEngine();
+                        firstCheck = true;
+                        break;
+                    }
+                }
+            }
+            if(firstCheck && secondCheck){
+                finalResult += (firstEngine * secondEngine);
+            }
         }
         System.out.println(finalResult);
     }
