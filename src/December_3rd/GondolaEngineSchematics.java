@@ -76,6 +76,14 @@ public class GondolaEngineSchematics {
         System.out.println(finalResult);
     }
 
+    private String fillStringWithPeriods() {
+        String line = "";
+        for (int j = 0; j < engine.get(0).length(); j++) {
+            line += ".";
+        }
+        return line;
+    }
+
     public void checkEnginePartTwo(){
         try (BufferedReader bf = Files.newBufferedReader(path)) {
             String reader;
@@ -140,13 +148,5 @@ public class GondolaEngineSchematics {
             }
         }
         System.out.println(finalResult);
-    }
-
-    private String fillStringWithPeriods() {
-        String line = "";
-        for (int j = 0; j < engine.get(0).length(); j++) {
-            line += ".";
-        }
-        return line;
     }
 }
