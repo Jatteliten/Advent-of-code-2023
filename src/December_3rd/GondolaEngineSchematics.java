@@ -92,29 +92,25 @@ public class GondolaEngineSchematics {
             }
             int y = 0;
             for(String s: engine){
-                int x = 0;
                 for(int i = 0; i < s.length(); i++){
                     char check = s.charAt(i);
                     if(check == '*'){
-                        Gear g = new Gear(x, y);
+                        Gear g = new Gear(i, y);
                         gears.add(g);
                     }else if(Character.isDigit(check)){
                         String engine = String.valueOf(check);
-                        int startX = x;
+                        int startX = i;
                         if(Character.isDigit(s.charAt(i + 1))){
                             engine += String.valueOf(s.charAt(i + 1));
                             i++;
-                            x++;
                             if(Character.isDigit(s.charAt(i + 1))){
                                 engine += String.valueOf(s.charAt(i + 1));
                                 i++;
-                                x++;
                             }
                         }
                         Engine g = new Engine(engine, startX, y);
                         engines.add(g);
                     }
-                    x++;
                 }
                 y++;
             }
