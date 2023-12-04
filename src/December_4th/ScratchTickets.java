@@ -77,8 +77,10 @@ public class ScratchTickets {
                     }
                 }
                 for(int k = 0; k < winningTickets; k++){
-                    try{rounds.get(i+k+1).incrementNumbersOfTickets();}
-                    catch(IndexOutOfBoundsException e){
+                    try{
+                        rounds.get(i+k+1).incrementNumbersOfTickets();
+                    } catch(IndexOutOfBoundsException e){
+                        //ignored
                     }
                 }
                 winningTickets = 0;
