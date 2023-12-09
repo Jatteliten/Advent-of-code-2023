@@ -46,8 +46,8 @@ public class OasisSensor {
 
             for (ArrayList<Double[]> list: allReadings) {
                 double lastNumber = 0;
-                for (int j = list.size() - 1; j >= 0; j--) {
-                    lastNumber += list.get(j)[list.get(j).length - 1];
+                for (int i = list.size() - 1; i >= 0; i--) {
+                    lastNumber += list.get(i)[list.get(i).length - 1];
                 }
                 finalResult += lastNumber;
             }
@@ -91,8 +91,8 @@ public class OasisSensor {
 
             for (ArrayList<Double[]> list: allReadings) {
                 double lastNumber = 0;
-                for (int j = list.size() - 1; j >= 0; j--) {
-                    lastNumber = list.get(j)[0] - lastNumber;
+                for (int i = list.size() - 1; i >= 0; i--) {
+                    lastNumber = list.get(i)[0] - lastNumber;
                 }
                 finalResult += lastNumber;
             }
