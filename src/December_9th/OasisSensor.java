@@ -44,10 +44,10 @@ public class OasisSensor {
                 allReadings.add(readings);
             }
 
-            for(int i = 0; i < allReadings.size(); i++){
+            for (ArrayList<Double[]> list: allReadings) {
                 double lastNumber = 0;
-                for(int j = allReadings.get(i).size() - 1; j >= 0; j--){
-                    lastNumber += allReadings.get(i).get(j)[allReadings.get(i).get(j).length - 1];
+                for (int j = list.size() - 1; j >= 0; j--) {
+                    lastNumber += list.get(j)[list.get(j).length - 1];
                 }
                 finalResult += lastNumber;
             }
@@ -89,11 +89,10 @@ public class OasisSensor {
                 allReadings.add(readings);
             }
 
-            for(int i = 0; i < allReadings.size(); i++){
+            for (ArrayList<Double[]> list: allReadings) {
                 double lastNumber = 0;
-                for(int j = allReadings.get(i).size() - 1; j >= 0; j--){
-                    lastNumber = allReadings.get(i).get(j)[0] - lastNumber;
-                    System.out.println(lastNumber);
+                for (int j = list.size() - 1; j >= 0; j--) {
+                    lastNumber = list.get(j)[0] - lastNumber;
                 }
                 finalResult += lastNumber;
             }
